@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Turnos del profesional</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/turnos.css">
+    </head>
+    <body>       
+        <h1>Turnos del profesional</h1>
+        <h2 th:text="'Seleccione turno para el '+ ${profesional.especialidad.nombre} +' '+ ${profesional.nombre}">  </h2>
+        </form><form th:action="@{/paciente/turnos/reservar}" method="post">
+         <img src="/img/registros/calendar.png" class="img" alt="">
+            <table>
+                <tr>
+                    <th>Día</th>
+                    <th>Horario</th>
+                    <th>Seleccionar</th>
+                </tr>
+                <tr th:each="turno : ${turnos}">
+                    <td th:text="${turno.dia}"></td>
+                    <td>
+                        <span th:each="horario : ${turno.horario}">
+                            <label th:text="${horario}"></label>
+                            <input id="idProf" name="idProf" type="hidden" th:value="${profesional.dni}">
+                            <input type="radio" th:name="idTurno" th:value="${turno.id}" />
+                        </span>
+                    </td>
+   
+                </tr>
+                <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Ingrese mail para confirmar" required>
+            </div>
+            </table>
+            <button type="submit">Guardar</button>
+        </form>
+    </body>
+</html>
